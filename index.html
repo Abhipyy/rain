@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Traditional Rain Prediction Verifier</title>
+
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<header>
+  <div>
+    <h1>🌧️ Traditional Rain Prediction Verifier</h1>
+    <p>Verify if traditional bio-indicator conditions were met before a rain event</p>
+  </div>
+  <div class="controls">
+    <a href="METHODS.html" target="_blank" class="methods-btn" title="Read about all 7 methods">
+      📖 Methods
+    </a>
+
+    <label>Place:</label>
+    <input type="text" id="placeName" placeholder="e.g. Haliyal, India" />
+    <button class="search-btn" id="searchBtn">🔍</button>
+
+    <label>Lat:</label>
+    <input type="number" id="latInput" step="0.0001" placeholder="15.3286" style="width:90px;" />
+
+    <label>Lon:</label>
+    <input type="number" id="lonInput" step="0.0001" placeholder="74.7564" style="width:90px;" />
+
+    <button class="search-btn" id="coordBtn">📍 Go</button>
+
+    <label>Rain Date:</label>
+    <input type="date" id="rainDate" />
+
+    <label>Lookback:</label>
+    <select id="lookback">
+      <option value="48">48 hrs</option>
+      <option value="72" selected>72 hrs</option>
+      <option value="120">120 hrs</option>
+    </select>
+
+    <button id="fetchBtn" disabled>Fetch & Analyze</button>
+  </div>
+</header>
+
+<div class="main-container">
+  <div id="map"></div>
+  <div class="results-panel" id="results">
+    <div class="card">
+      <h2>📍 Selected Location</h2>
+      <p id="locationInfo" class="muted">Click on the map, search a place, or enter coordinates</p>
+
+      <div class="explain-box" style="margin-top:1rem;">
+        <strong>👋 New here?</strong>
+        Read about all 7 traditional methods first →
+        <a href="METHODS.html" target="_blank" style="color:#38bdf8; font-weight:600;">📖 Open Methods Guide</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns@3.0.0/dist/chartjs-adapter-date-fns.bundle.min.js"></script>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script src="app.js"></script>
+
+</body>
+</html>

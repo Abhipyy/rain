@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Reading the Sky from the Ground: 7 Traditional Rain Signals</title>
+<link href="https://fonts.googleapis.com/css2?family=Literata:opsz,wght@7..72,400;7..72,700;7..72,800&family=Figtree:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px);
+  padding-bottom:env(safe-area-inset-bottom,0px);
+  --bg:#e8efed; --surface:#f7faf9; --ink:#14292c; --muted:#4d6468; --line:#c5d4d1;
+  --rain:#2a6f8f; --gold:#c98a00; --chip:#dbe7e4;
+  --serif:'Literata',Georgia,serif; --sans:'Figtree',system-ui,sans-serif;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#0f1c1e; --surface:#172a2d; --ink:#e6f0ee; --muted:#9bb3b1; --line:#2b4448;
+  --rain:#6fb8d8; --gold:#f0b43a; --chip:#21393c;}}
+:root[data-theme="dark"]{
+  --bg:#0f1c1e; --surface:#172a2d; --ink:#e6f0ee; --muted:#9bb3b1; --line:#2b4448;
+  --rain:#6fb8d8; --gold:#f0b43a; --chip:#21393c;}
+html{height:100%;scroll-padding-top:env(safe-area-inset-top,0px);scroll-behavior:smooth}
+*,*::before,*::after{box-sizing:inherit}
+body{margin:0;min-height:100%;background:var(--bg);color:var(--ink);font:400 17px/1.6 var(--sans)}
+.wrap{max-width:860px;margin:0 auto;padding:0 20px 64px}
+header{padding:56px 0 28px}
+h1{font:800 clamp(2rem,6vw,3.4rem)/1.08 var(--serif);margin:0 0 16px;letter-spacing:-.02em;max-width:16em}
+.lede{font-size:1.1rem;color:var(--muted);max-width:38em;margin:0}
+
+/* horizon scale: the one memorable element */
+.scale{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:22px 22px 18px;margin:12px 0 40px}
+.scale h2{font:700 1.05rem var(--serif);margin:0 0 4px}
+.scale p{margin:0 0 6px;color:var(--muted);font-size:.93rem}
+.track{position:relative;height:118px;margin:0 14px}
+.track::before{content:"";position:absolute;left:0;right:0;top:64px;height:4px;border-radius:2px;
+  background:linear-gradient(90deg,var(--rain),var(--gold))}
+.tick{position:absolute;top:76px;transform:translateX(-50%);font-size:.78rem;color:var(--muted);white-space:nowrap}
+.pin{position:absolute;transform:translateX(-50%);width:30px;height:30px;border-radius:50%;
+  border:2px solid var(--surface);background:var(--c);color:#fff;font:600 .75rem var(--sans);
+  cursor:pointer;display:grid;place-items:center;padding:0;box-shadow:0 0 0 1px var(--c)}
+.pin:hover{transform:translateX(-50%) scale(1.15)}
+.pin:focus-visible,summary:focus-visible{outline:3px solid var(--gold);outline-offset:3px}
+
+/* method cards */
+.list{display:grid;gap:14px}
+details{background:var(--surface);border:1px solid var(--line);border-left:6px solid var(--c);border-radius:12px}
+summary{list-style:none;cursor:pointer;padding:18px 20px;display:flex;gap:14px;align-items:center}
+summary::-webkit-details-marker{display:none}
+.ico{font-size:1.9rem;line-height:1;flex:none;width:44px;text-align:center}
+.ttl{flex:1;min-width:0}
+.ttl h3{font:700 1.2rem/1.25 var(--serif);margin:0}
+.ttl span{color:var(--muted);font-size:.92rem;font-style:italic}
+.hz{flex:none;background:var(--chip);border-radius:99px;padding:3px 12px;font-weight:600;font-size:.85rem}
+.chev{flex:none;width:10px;height:10px;border-right:2px solid var(--muted);border-bottom:2px solid var(--muted);
+  transform:rotate(45deg);transition:transform .2s}
+details[open] .chev{transform:rotate(-135deg)}
+.body{padding:0 20px 22px 78px;display:grid;gap:16px}
+.body h4{font:700 .95rem var(--sans);margin:0 0 3px;color:var(--c)}
+.body p{margin:0;max-width:62ch}
+.rule{background:var(--chip);border-radius:8px;padding:10px 14px;font-weight:600;font-family:var(--sans)}
+.meta{display:flex;flex-wrap:wrap;gap:8px 22px;color:var(--muted);font-size:.9rem}
+.meta b{color:var(--ink);font-weight:600}
+.formula{font-family:ui-monospace,Menlo,monospace;font-size:.9rem;background:var(--chip);padding:8px 12px;border-radius:8px;overflow-x:auto}
+
+
+/* scene banners */
+.ban{position:relative;height:150px;border-radius:10px;overflow:hidden;
+  background:linear-gradient(180deg,#1c3440 0%,color-mix(in srgb,var(--c) 40%,#1c3440) 100%)}
+.ban svg{display:block;width:100%;height:100%}
+.ban.rain::after,header::before{content:"";position:absolute;inset:0;pointer-events:none;
+  background:repeating-linear-gradient(105deg,transparent 0 13px,rgba(255,255,255,.22) 13px 14px);
+  background-size:60px 60px;animation:fall .7s linear infinite}
+@keyframes fall{to{background-position:-24px 60px}}
+header{position:relative}
+header::before{inset:0 -20px;opacity:.16;background-image:repeating-linear-gradient(105deg,transparent 0 13px,var(--rain) 13px 14px);
+  -webkit-mask-image:linear-gradient(180deg,#000,transparent);mask-image:linear-gradient(180deg,#000,transparent);animation-duration:1.4s}
+header>*{position:relative}
+@media (prefers-reduced-motion:reduce){.ban::after,header::before{animation:none!important}}
+
+
+.ban>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.btns{position:absolute;right:8px;bottom:8px;z-index:2;display:flex;gap:6px}
+.btns button{font:600 .8rem var(--sans);border:0;border-radius:99px;padding:6px 12px;cursor:pointer;
+  background:rgba(255,255,255,.92);color:#14292c}
+.btns button:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
+.btns .rm{display:none}
+
+/* summary table */
+.tw{overflow-x:auto;margin-top:44px;border:1px solid var(--line);border-radius:12px;background:var(--surface)}
+table{border-collapse:collapse;width:100%;min-width:620px;font-size:.93rem}
+th,td{text-align:left;padding:11px 14px;border-bottom:1px solid var(--line)}
+th{font-weight:600;color:var(--muted)}
+tr:last-child td{border-bottom:0}
+h2.sec{font:800 1.5rem var(--serif);margin:48px 0 14px}
+footer{margin-top:32px;color:var(--muted);font-size:.88rem}
+@media (max-width:620px){
+  summary{flex-wrap:wrap}.hz{order:3}.body{padding-left:20px}.ico{width:auto}
+  .tick:nth-child(even){display:none}
+}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+  <h1>Seven ways villages read the weather before the rain</h1>
+  <p class="lede">Indian farming communities have long watched ants, frogs, fish and flowers for signs of rain. Each signal below comes with the science that explains it and the simple weather rule used to test it in the simulation.</p>
+</header>
+
+<section class="scale" aria-labelledby="sc">
+  <h2 id="sc">How far ahead does each signal warn?</h2>
+  <p>Tap a circle to jump to that method. The scale is stretched so hours and days fit on one line.</p>
+  <div class="track" id="track"></div>
+</section>
+
+<div class="list" id="list"></div>
+
+<h2 class="sec">All seven at a glance</h2>
+<div class="tw"><table id="tbl"><thead><tr><th>Method</th><th>Lead time</th><th>Weather data</th><th>Rule</th></tr></thead><tbody></tbody></table></div>
+
+<footer>Source: “Scientific Rationalization and Operational Framework of Indigenous Technical Knowledge for Rainfall Prediction Across Agro-Ecological Zones of India.” Page numbers refer to that document.</footer>
+</div>
+
+<script>
+const M=[
+{n:"Ant mound relocation",s:"Formicidae",i:"🐜",c:"#8a5a2b",h:"12–24 hours",hh:18,pg:"Pages 22–23 · Matrix p. 44",
+ sig:"Ants moving eggs to higher ground or building taller soil mounds means rain is close.",
+ sci:"Ants have antennal sensors that detect small shifts in humidity and vapour pressure deficit. When heavy rain is coming, they carry their eggs and pupae to higher, better-drained ground so the colony does not drown.",
+ reg:"India-wide farming belts",data:"Pressure + humidity",rule:"Pressure falls by more than 2 hPa in 6 hours AND humidity is above 80%"},
+{n:"Frog choruses",s:"Dicroglossidae / Bufonidae",i:"🐸",c:"#3e7a4f",h:"12–24 hours",hh:18,pg:"Pages 15–16 · Matrix p. 42",
+ sig:"Loud, synchronized croaking on pre-monsoon evenings is known across rural India as a rain signal.",
+ sci:"Frogs breathe partly through their skin, which must stay moist. When humidity passes 85% and pressure drops below 1000 hPa, they lose little water to the air and can leave their underground burrows safely. The chorus is a mating call timed so eggs are laid in the temporary rain pools.",
+ reg:"Gangetic Plains, Western Ghats, North-East",data:"Humidity + pressure",rule:"Humidity above 85% AND pressure below 1000 hPa"},
+{n:"Sparrow dust-bathing",s:"Passer domesticus",i:"🐦",c:"#9a6b3f",h:"12–24 hours",hh:18,pg:"Pages 10–12 · Matrix p. 50",
+ sig:"House sparrows bathe energetically in dust and flock low near water before rain.",
+ sci:"Humid air makes feathers clump and upsets the oils from the preen gland. Dust absorbs the extra moisture and oil, which keeps the feathers light and warm. Falling pressure also pushes insects lower, so birds feed closer to the ground.",
+ reg:"Indo-Gangetic Plains, Central India",data:"Humidity",rule:"Humidity above 80%"},
+{n:"Chilli and tobacco softening",s:"Solanum frutescens",i:"🌶️",c:"#b3362c",h:"12–24 hours",hh:18,pg:"Page 34 · Matrix p. 47",
+ sig:"Dried chillies and tobacco leaves going soft during a dry spell means rain is coming.",
+ sci:"Dried plant material works like a natural hygrometer. When humidity rises above 80%, water vapour condenses inside the tiny pores of the plant tissue and softens it before any rain falls.",
+ reg:"Humid zones: North-East, coastal belts",data:"Humidity",rule:"Humidity above 80%"},
+{n:"Cricket soil excavation",s:"Gryllus pensylvanicus",i:"🦗",c:"#6b7a2a",h:"24–48 hours",hh:36,pg:"Pages 20–21 · Matrix p. 43",
+ sig:"In Mizoram and Eastern India, crickets carrying fresh soil out of their burrows in dry weather means rain is on the way.",
+ sci:"Rising humidity and wetter soil change how gases move underground. Crickets clear their burrows to keep them stable and supplied with oxygen before heavy rain.",
+ reg:"North-East hills (Mizoram, Assam)",data:"Soil moisture, 0–7 cm",rule:"Soil moisture rises by more than 0.02 m³/m³ in 24 hours"},
+{n:"Fish breaching",s:"Fish in ponds, rivers and lakes",i:"🐟",c:"#2a6f8f",h:"6–12 hours",hh:9,pg:"Pages 17–19 · Matrix p. 41",
+ sig:"Fish suddenly jumping out of ponds and rivers often comes just before heavy monsoon rain.",
+ sci:"Water holds less oxygen when it is warm and when air pressure is low (Henry’s Law). Before a storm, falling pressure and a hot surface layer can push oxygen below 3 mg/L. Plants also stop producing oxygen under cloud and at night. Fish rise to the surface or leap to breathe air.",
+ reg:"Inland ponds, rivers and lakes across India",data:"Pressure + temperature",rule:"Pressure falls by more than 2 hPa in 6 hours AND temperature is above 30°C",
+ f:"Henry’s Law:  C = k · P_gas"},
+{n:"Amaltas bloom",s:"Cassia fistula, golden shower tree",i:"🌼",c:"#c98a00",h:"About 45 days",hh:1080,pg:"Pages 24–25 · Matrix p. 40",
+ sig:"When Amaltas trees are in full bloom, the southwest monsoon arrives about 45 days later.",
+ sci:"Flowering is driven by accumulated heat. The late-spring heat peak ends bud dormancy and starts a 45-day progression from flower to seed pod, which matches the gap between peak summer and the monsoon trough arriving.",
+ reg:"Peninsular, Central and North India",data:"Temperature (cumulative)",rule:"Growing degree days (base 10°C) above 800",
+ f:"GDD = Σ ((T_max + T_min) / 2 − T_base)"}
+];
+
+const P=(a)=>`<svg viewBox="0 0 720 150" preserveAspectRatio="xMidYMid slice" role="img" aria-hidden="true">${a}</svg>`;
+const cloud='<g fill="#0d1a21" opacity=".5"><ellipse cx="120" cy="26" rx="84" ry="19"/><ellipse cx="610" cy="22" rx="92" ry="17"/></g>';
+const S=[
+P(cloud+'<rect y="122" width="720" height="28" fill="#5a3a1c"/><path d="M240 150Q330 66 400 58Q470 66 570 150Z" fill="#8a5a2b"/><g fill="#1b1008"><ellipse cx="322" cy="106" rx="8" ry="4"/><ellipse cx="362" cy="84" rx="8" ry="4"/><ellipse cx="452" cy="86" rx="8" ry="4"/><ellipse cx="500" cy="112" rx="8" ry="4"/></g><g fill="#f4ecd8"><ellipse cx="322" cy="98" rx="4" ry="5.5"/><ellipse cx="362" cy="76" rx="4" ry="5.5"/><ellipse cx="452" cy="78" rx="4" ry="5.5"/><ellipse cx="500" cy="104" rx="4" ry="5.5"/></g><path d="M400 58v-10M394 52l6-6 6 6" stroke="#f4ecd8" fill="none" stroke-width="2" opacity=".6"/>'),
+P('<circle cx="620" cy="34" r="16" fill="#f2e9c4"/><rect y="104" width="720" height="46" fill="#1d4f5e"/><g fill="none" stroke="#9fd4e0" opacity=".5"><ellipse cx="360" cy="128" rx="64" ry="8"/><ellipse cx="360" cy="128" rx="110" ry="14"/></g><g fill="#3e7a4f"><ellipse cx="200" cy="124" rx="34" ry="7"/><ellipse cx="540" cy="132" rx="30" ry="6"/></g><ellipse cx="360" cy="100" rx="36" ry="22" fill="#4f9a5f"/><circle cx="360" cy="112" r="15" fill="#b7e0a8" opacity=".85"/><circle cx="344" cy="76" r="10" fill="#4f9a5f"/><circle cx="376" cy="76" r="10" fill="#4f9a5f"/><circle cx="344" cy="76" r="4.5" fill="#111"/><circle cx="376" cy="76" r="4.5" fill="#111"/><path d="M410 92q14-8 0-18M424 96q22-12 0-34M438 100q30-16 0-50" stroke="#dff3f7" fill="none" stroke-width="2" opacity=".7"/>'),
+P('<g fill="#e6eef0" opacity=".25"><ellipse cx="150" cy="30" rx="70" ry="14"/><ellipse cx="580" cy="40" rx="80" ry="15"/></g><rect y="120" width="720" height="30" fill="#a98a5a"/><g fill="#d9c39a" opacity=".6"><circle cx="330" cy="114" r="20"/><circle cx="380" cy="108" r="26"/><circle cx="420" cy="116" r="18"/><circle cx="355" cy="92" r="14"/></g><path d="M338 94L306 86L310 100Z" fill="#5d452b"/><ellipse cx="362" cy="96" rx="27" ry="17" fill="#8c6a45"/><ellipse cx="354" cy="97" rx="15" ry="9" fill="#5d452b" transform="rotate(-14 354 97)"/><circle cx="390" cy="84" r="11" fill="#7a5a3a"/><path d="M399 83l13 5-13 3Z" fill="#e0a21b"/><circle cx="393" cy="82" r="2" fill="#111"/><path d="M360 112v8M368 112v8" stroke="#e0a21b" stroke-width="2"/><path d="M540 64q14-14 28 0q14-14 28 0" stroke="#e6d9bd" fill="none" stroke-width="3"/>'),
+P('<defs><path id="ch" d="M0 0c6 4 9 22 3 46c-3 8-9 8-9 0c-1-24 0-40 6-46z" fill="#b3362c"/></defs><rect y="0" width="720" height="10" fill="#5a3a1c"/><path d="M60 10Q360 26 660 10" stroke="#d9c39a" fill="none" stroke-width="2"/><g><use href="#ch" x="110" y="26"/><use href="#ch" x="170" y="30" transform="rotate(6 170 30)"/><use href="#ch" x="230" y="32"/><use href="#ch" x="290" y="34" transform="rotate(-6 290 34)"/><use href="#ch" x="350" y="35"/><use href="#ch" x="410" y="34" transform="rotate(6 410 34)"/><use href="#ch" x="470" y="32"/><use href="#ch" x="530" y="30" transform="rotate(-6 530 30)"/><use href="#ch" x="590" y="26"/></g><g fill="#9fd4e0" opacity=".6"><circle cx="80" cy="100" r="3"/><circle cx="210" cy="118" r="4"/><circle cx="320" cy="108" r="3"/><circle cx="450" cy="120" r="4"/><circle cx="560" cy="104" r="3"/><circle cx="660" cy="124" r="4"/></g><ellipse cx="360" cy="150" rx="340" ry="22" fill="#fff" opacity=".1"/>'),
+P('<rect y="82" width="720" height="68" fill="#5b3b22"/><rect y="120" width="720" height="30" fill="#47301b"/><rect y="78" width="720" height="8" fill="#4a7a3a"/><path d="M360 84V116Q360 134 400 134H480" stroke="#241509" stroke-width="18" fill="none" stroke-linecap="round"/><path d="M328 80Q360 56 392 80Z" fill="#7a5232"/><ellipse cx="450" cy="70" rx="21" ry="9" fill="#2b1d12"/><circle cx="472" cy="66" r="7" fill="#2b1d12"/><circle cx="480" cy="68" r="3" fill="#7a5232"/><path d="M476 60q14-18 30-20M476 62q20-12 34-6" stroke="#2b1d12" fill="none" stroke-width="1.5"/><path d="M438 76l-8 8M450 78l-2 8M460 77l6 8" stroke="#2b1d12" stroke-width="2"/><g fill="#7a5232"><circle cx="510" cy="58" r="3"/><circle cx="530" cy="66" r="2.5"/><circle cx="548" cy="72" r="2"/></g>'),
+P('<g opacity=".3" fill="#fff"><ellipse cx="150" cy="24" rx="80" ry="12"/></g><path d="M250 98Q360-14 470 98" stroke="#fff" fill="none" stroke-dasharray="4 7" opacity=".4"/><g transform="translate(360 40) rotate(-20)"><path d="M-30 0L-56-15L-56 15Z" fill="#9fb3bb"/><ellipse rx="36" ry="14" fill="#c9d6dc"/><path d="M-20 4Q0 10 22 4" stroke="#e8f1f4" fill="none" stroke-width="3"/><circle cx="22" cy="-3" r="3" fill="#111"/></g><g fill="#fff" opacity=".7"><circle cx="300" cy="76" r="3"/><circle cx="330" cy="86" r="2"/><circle cx="418" cy="70" r="3"/><circle cx="440" cy="82" r="2"/></g><path d="M0 100q45-10 90 0t90 0t90 0t90 0t90 0t90 0t90 0t90 0V150H0Z" fill="#2a7fa0"/><rect y="118" width="720" height="32" fill="#1d5c78"/><g fill="none" stroke="#bfe6f2" opacity=".6"><circle cx="120" cy="126" r="5"/><circle cx="200" cy="136" r="3"/><circle cx="560" cy="128" r="5"/></g>'),
+P('<circle cx="100" cy="42" r="26" fill="#f7c948" opacity=".9"/><defs><g id="fl"><path d="M0 0V34" stroke="#6a8a3a" stroke-width="1.5"/><circle cy="14" r="5" fill="#f2b705"/><circle cy="23" r="5.5" fill="#f7c948"/><circle cy="32" r="5" fill="#f2b705"/></g></defs><rect y="128" width="720" height="22" fill="#4a6b3a"/><path d="M348 150L355 66L365 66L372 150Z" fill="#5a3a1c"/><path d="M360 78L270 44M360 74L450 40M358 90L290 70M362 88L436 66" stroke="#5a3a1c" stroke-width="5" stroke-linecap="round"/><g fill="#4a6b3a" opacity=".8"><ellipse cx="300" cy="40" rx="40" ry="10"/><ellipse cx="430" cy="36" rx="40" ry="10"/></g><use href="#fl" x="280" y="46"/><use href="#fl" x="305" y="52"/><use href="#fl" x="330" y="56"/><use href="#fl" x="395" y="54"/><use href="#fl" x="420" y="48"/><use href="#fl" x="445" y="42"/><use href="#fl" x="300" y="70"/><use href="#fl" x="425" y="68"/><use href="#fl" x="262" y="44"/><use href="#fl" x="470" y="42"/>')
+];
+const RAIN=[1,1,0,0,0,1,0];
+const list=document.getElementById('list'),track=document.getElementById('track'),tb=document.querySelector('#tbl tbody');
+const pos=h=>((Math.log10(h)-0.6)/(3.2-0.6))*100;
+M.forEach((m,k)=>{
+  const d=document.createElement('details');d.id='m'+k;d.style.setProperty('--c',m.c);if(k===0)d.open=true;
+  d.innerHTML=`<summary><span class="ico" aria-hidden="true">${m.i}</span><span class="ttl"><h3>${m.n}</h3><span>${m.s}</span></span><span class="hz">${m.h}</span><span class="chev"></span></summary>
+  <div class="body">
+   <div class="ban${RAIN[k]?' rain':''}">${S[k]}<img alt="${m.n}" hidden></div>
+   <div><h4>What people notice</h4><p>${m.sig}</p></div>
+   <div><h4>Why it happens</h4><p>${m.sci}</p></div>
+   ${m.f?`<div class="formula">${m.f}</div>`:''}
+   <div><h4>Rule used in the simulation</h4><div class="rule">${m.rule}</div></div>
+   <div class="meta"><span><b>Where:</b> ${m.reg}</span><span><b>Data:</b> ${m.data}</span><span><b>Source:</b> ${m.pg}</span></div>
+  </div>`;
+  list.appendChild(d);
+  const tr=document.createElement('tr');
+  tr.innerHTML=`<td>${m.i} ${m.n}</td><td>${m.h}</td><td>${m.data}</td><td>${m.rule}</td>`;tb.appendChild(tr);
+});
+// pins: stagger vertically where horizons overlap
+const groups={};
+M.forEach((m,k)=>{
+  const key=m.hh;groups[key]=(groups[key]||0);
+  const b=document.createElement('button');b.className='pin';b.textContent=m.i;b.style.fontSize='1rem';
+  b.style.setProperty('--c',m.c);b.style.left=(pos(m.hh)+groups[key]*4.2-(key==18?6.3:0))+'%';
+  b.style.top=(groups[key]%2?18:50-30+30)+'px';b.style.top=(groups[key]%2?14:34)+'px';
+  b.setAttribute('aria-label',m.n+', '+m.h);groups[key]++;
+  b.onclick=()=>{const d=document.getElementById('m'+k);d.open=true;d.scrollIntoView({block:'center'})};
+  track.appendChild(b);
+});
+[[6,'6 hours'],[24,'1 day'],[48,'2 days'],[168,'1 week'],[1080,'45 days']].forEach(([h,t])=>{
+  const e=document.createElement('span');e.className='tick';e.textContent=t;e.style.left=pos(h)+'%';track.appendChild(e);
+});
+
+/* real photos: files sit in the same folder as this HTML file */
+const FILES=["20240428_fireant_trees.jpg","frog.avif","sparrow.jpeg","Chilli.jpeg","cricket.webp","fish.jpeg","amaltas.webp"];
+FILES.forEach((f,k)=>{
+  const b=document.querySelector('#m'+k+' .ban'),img=b.querySelector('img'),t=new Image();
+  t.onload=()=>{img.src=f;img.hidden=false;b.querySelector('svg').style.display='none';b.classList.remove('rain')};
+  t.src=f; /* if the file is missing, the drawn scene stays */
+});
+</script>
+</body>
+</html>
